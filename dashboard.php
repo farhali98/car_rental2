@@ -16,6 +16,57 @@ $count = $stmt -> rowCount();
  $count2 = $stmt -> rowCount();
     
 
+//Graps
+ 
+$totalVisitors = 883000;
+ 
+$newVsReturningVisitorsDataPoints = array(
+	array("y"=> 519960, "name"=> "New Visitors", "color"=> "#E7823A"),
+	array("y"=> 363040, "name"=> "Returning Visitors", "color"=> "#546BC1")
+);
+ 
+$newVisitorsDataPoints = array(
+	array("x"=> 1420050600000 , "y"=> 33000),
+	array("x"=> 1422729000000 , "y"=> 35960),
+	array("x"=> 1425148200000 , "y"=> 42160),
+	array("x"=> 1427826600000 , "y"=> 42240),
+	array("x"=> 1430418600000 , "y"=> 43200),
+	array("x"=> 1433097000000 , "y"=> 40600),
+	array("x"=> 1435689000000 , "y"=> 42560),
+	array("x"=> 1438367400000 , "y"=> 44280),
+	array("x"=> 1441045800000 , "y"=> 44800),
+	array("x"=> 1443637800000 , "y"=> 48720),
+	array("x"=> 1446316200000 , "y"=> 50840),
+	array("x"=> 1448908200000 , "y"=> 51600)
+);
+ 
+$returningVisitorsDataPoints = array(
+	array("x"=> 1420050600000 , "y"=> 22000),
+	array("x"=> 1422729000000 , "y"=> 26040),
+	array("x"=> 1425148200000 , "y"=> 25840),
+	array("x"=> 1427826600000 , "y"=> 23760),
+	array("x"=> 1430418600000 , "y"=> 28800),
+	array("x"=> 1433097000000 , "y"=> 29400),
+	array("x"=> 1435689000000 , "y"=> 33440),
+	array("x"=> 1438367400000 , "y"=> 37720),
+	array("x"=> 1441045800000 , "y"=> 35200),
+	array("x"=> 1443637800000 , "y"=> 35280),
+	array("x"=> 1446316200000 , "y"=> 31160),
+	array("x"=> 1448908200000 , "y"=> 34400)
+);
+ 
+$dataPoints = array( 
+	array("label"=>"Mazda cx-5", "y"=>64.02),
+	array("label"=>"landrover", "y"=>12.55),
+	array("label"=>"Toyota", "y"=>8.47),
+	array("label"=>"Subaru", "y"=>6.08),
+	array("label"=>"Hyundai", "y"=>4.29),
+	array("label"=>"Others", "y"=>4.59)
+)
+ 
+
+
+
 
 
 
@@ -147,7 +198,7 @@ a.sidebar-link:hover {
     position: absolute;
     top: 0;
     left: 70px;
-    background-color: #0e2238;
+    background-color: red;
     padding: 0;
     min-width: 15rem;
     display: none;
@@ -254,32 +305,78 @@ a.sidebar-link:hover {
             </div>
         </aside>
         <div class="main p-3">
-          
+          <H1 class="text-center">Welcome User</H1>
             
-		<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Orders Made</h5>
-    
-    <p class="card-text"><?=$count2?></p>
-    
+          <div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card text-white bg-danger" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Bookings Made</h5>
+          <p class="card-text"><?= $count2 ?></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-white bg-danger" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">??</h5>
+          <p class="card-text"><?= $count ?></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-white bg-danger" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Favourite Car</h5>
+          <p class="card-text">Mazda CX5</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mt-3">
+      <div class="card text-white bg-danger" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Next booking</h5>
+          <p class="card-text">1st june 2024</p>
+        </div>
+      </div>
+    </div>
   </div>
-</div>    
+</div>
+
 	
 
-<div class="card" style="width: 18rem;">
+    <div class="card  mt-3">
   <div class="card-body">
-    <h5 class="card-title">users</h5>
-    
-    <p class="card-text"><?=$count?></p>
-    
-  </div>
-</div>    
-	
-	
-	
-	
-	
-	</div>
+  <script>
+window.onload = function() {
+ 
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title: {
+		text: "Car brands Booked"
+	},
+	subtitles: [{
+		text: "2024"
+	}],
+	data: [{
+		type: "pie",
+		yValueFormatString: "#,##0.00\"%\"",
+		indexLabel: "{label} ({y})",
+		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+}
+</script>
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+
+
+</div>
     </div>
 
    

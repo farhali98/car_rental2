@@ -1,5 +1,78 @@
 <?php
 session_start(); 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require_once('config.php');
+
+require_once 'PHPMailer\PHPMailer-master\src\PHPMailer.php';
+require_once 'PHPMailer\PHPMailer-master\src\Exception.php';
+require_once 'PHPMailer\PHPMailer-master\src\SMTP.php';
+
+
+
+
+
+
+
+
+
+
+
+function send_email($email, $tfa){
+
+    
+    
+    
+    
+  // Create a new PHPMailer instance
+  $mail = new PHPMailer();
+  
+  try {
+      //Server settings
+      $mail->isSMTP();
+      $mail->Host       = 'smtp.gmail.com'; // SMTP server
+      $mail->SMTPAuth   = true;                // Enable SMTP authentication
+      $mail->Username   = 'farhamusaali@gmail.com';  // SMTP username
+      $mail->Password   = 'wsat blaz eyrc zody';// SMTP password
+      $mail->SMTPSecure = 'tls';               // Enable TLS encryption
+      $mail->Port       = 587;                 // TCP port to connect to
+  
+      //Sender and recipient settings
+      $mail->setFrom('farhamusaali@gmail.com', 'Metro Car Hire');
+      $mail->addAddress($email, 'cow');
+  
+      // Content
+                                       // Set email format to HTML
+      $mail->Subject = 'This is your 2 factor authentication code ';
+      $mail->Body    = $tfa;
+  
+      // Send the email
+      $mail->send();
+      ?>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-success">
+              <div class = "text-center">UR EMAIL HAS BEEN SENT SUCCESFULLY</div>
+            </div>
+          </div>
+        </div>
+      <?php
+  } catch (Exception) {
+      echo "Mailer Error: {$mail->ErrorInfo}";
+  }
+  
+  
+  
+
+}
+
+
+
+
+
+
 	require_once('config.php');
 
 	function loginUser($pdo){
@@ -23,23 +96,28 @@ session_start();
 				$sql = "SELECT * FROM tbl_users WHERE username = ? AND password = ?";
 				$stmt = $pdo -> prepare($sql);
 				$stmt -> execute($params);
+       
+
+        $tfa = mt_rand (1000, 5000);
+
 				$count = $stmt -> rowCount();
 				if($count > 0){
 					$row = $stmt -> fetch();
 					$userid = $row['user_id'];
-					$roleid = $row['role_id'];
-					$_SESSION['uid'] = $userid;
-					$_SESSION['rid'] = $roleid;
-					?>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="alert alert-success">
-								<div class = "text-center">Login successful, please wait...</div>
-							</div>
-						</div>
-					</div>
-				<?php
-				header('Refresh:3; url=dashboard.php');
+					//$roleid = $row['role_id'];
+					$sql2 = "SELECT email FROM tbl_customers WHERE user_id=$userid";
+          $stmt2 = $pdo -> prepare($sql2);
+				  $stmt2 -> execute();
+
+          $email=$stmt2->fetchColumn();
+
+          $_SESSION['2fa'] = $tfa;
+					//$_SESSION['rid'] = $roleid;
+
+          header('Refresh:3; url=tfa.php');
+          send_email($email, $tfa);
+      
+			
 				}else{
 				?>
 					<div class="row">
@@ -56,7 +134,6 @@ session_start();
 		}
 	} 
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
