@@ -88,34 +88,34 @@
 
 <!--navbarrrrr-->
 
-	<nav class="navbar navbar-expand-lg custom-navbar">
+<nav class="navbar navbar-expand-lg custom-navbar">
   	<div class="container-fluid">
-    <a class="navbar-brand logo-text" style="font-weight: bold; color: red; font-size: 30px; margin-left: 30px;" href="#">Metro</a>
+    <a class="navbar-brand logo-text" style="font-weight: bold; color: red; font-size: 30px; margin-left: 30px;" href="index.php">Metro</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
         </li>
         <li class="dropdown">
             <button class="dropbtn">Cars For Hire</button>
             <ul class="dropdown-content">
-              <a href="#">Saloon Cars</a>
-              <a href="#">4x4 SUVs</a>
-              <a href="#">Executive Cars</a>
-              <a href="#">Shuttle Busses</a>
+              <a href="saloon.php">Saloon Cars</a>
+              <a href="4x4.php">4x4 SUVs</a>
+              <a href="executive.php">Executive Cars</a>
+              <a href="shuttle.php">Shuttle Busses</a>
             </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Our Services</a>
+          <a class="nav-link active" aria-current="page" href="services.php">Our Services</a>
         </li>
 		<li class="nav-item">
-          <a class="nav-link" href="#">About us</a>
+          <a class="nav-link" href="aboutus.php">About us</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Inquiries</a>
+            <a class="nav-link" href="contact_us.php">Inquiries</a>
           </li>
         
         <li class="nav-item dropdown" style="margin-left: 500px; font-weight: bold;">
@@ -123,13 +123,19 @@
             Account
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Sign Up</a></li>
+            <li><a class="dropdown-item" href="signup.php">Sign Up</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Sign In</a></li>
+            <li><a class="dropdown-item" href="signin.php">Sign In</a></li>
             
             
           </ul>
         </li>
+
+        <li class="sidebar-item">
+                    <a href="dashboard.php" class="sidebar-link">
+                        <i class="fa-solid fa-gear" style="color: red; margin-top:15px; margin-left:30px;"></i>
+                    </a>
+                </li>
         
       </ul>
       <!---<form class="d-flex" role="search">
@@ -139,7 +145,6 @@
     </div>
   </div>
 </nav>
-
 
 <!--carousellllll-->
 
@@ -269,10 +274,7 @@
         ><i class="fab fa-linkedin-in"></i
       ></a>
 
-      <!-- Github -->
-      <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
-        ><i class="fab fa-github"></i
-      ></a>
+      
     </section>
     <!-- Section: Social media -->
 
@@ -288,16 +290,16 @@
 
           <ul class="list-unstyled mb-0">
             <li>
-              <a class="text-body" href="#!">Saloon Cars</a>
+              <a class="text-body" href="saloon.php">Saloon Cars</a>
             </li>
             <li>
-              <a class="text-body" href="#!">4x4 SUVs</a>
+              <a class="text-body" href="4x4.php">4x4 SUVs</a>
             </li>
             <li>
-              <a class="text-body" href="#!">Executive Cars</a>
+              <a class="text-body" href="executive.php">Executive Cars</a>
             </li>
             <li>
-              <a class="text-body" href="#!">Shuttle Busses</a>
+              <a class="text-body" href="shuttle.php">Shuttle Busses</a>
             </li>
           </ul>
         </div>
@@ -309,19 +311,19 @@
 
           <ul class="list-unstyled mb-0">
             <li>
-              <a class="text-body" href="#!">VIP Transportation</a>
+              <a class="text-body" href="services.php">VIP Transportation</a>
             </li>
             <li>
-              <a class="text-body" href="#!">Airport Transfers</a>
+              <a class="text-body" href="services.php">Airport Transfers</a>
             </li>
             <li>
-              <a class="text-body" href="#!">Wedding & Bridal Services</a>
+              <a class="text-body" href="services.php">Wedding & Bridal Services</a>
             </li>
             <li>
-              <a class="text-body" href="#!">Tour & Safaris</a>
+              <a class="text-body" href="services.php">Tour & Safaris</a>
             </li>
             <li>
-              <a class="text-body" href="#!">City Excursion</a>
+              <a class="text-body" href="services.php">City Excursion</a>
             </li>
           </ul>
         </div>

@@ -16,6 +16,15 @@ $count = $stmt -> rowCount();
  $count2 = $stmt -> rowCount();
     
 
+ $sql3="SELECT* FROM tbl_cars";
+ $stmt=$pdo -> prepare($sql3);
+ $stmt -> execute();
+ 
+$count3 = $stmt -> rowCount();
+ 
+
+
+
 //Graps
  
 $totalVisitors = 883000;
@@ -121,7 +130,7 @@ body {
     width: 100%;
     overflow: hidden;
     transition: all 0.35s ease-in-out;
-    background-color: #D0D0D0;
+    background-color: white;
 }
 
 #sidebar {
@@ -129,7 +138,7 @@ body {
     min-width: 70px;
     z-index: 1000;
     transition: all .25s ease-in-out;
-    background-color: red;
+    background-color: lightgray;
     display: flex;
     flex-direction: column;
 }
@@ -148,7 +157,7 @@ body {
 
 .toggle-btn i {
     font-size: 1.5rem;
-    color: #FFF;
+    color: black;
 }
 
 .sidebar-logo {
@@ -173,7 +182,7 @@ body {
 
 a.sidebar-link {
     padding: .625rem 1.625rem;
-    color: #FFF;
+    color: black;
     display: block;
     font-size: 0.9rem;
     white-space: nowrap;
@@ -252,12 +261,12 @@ a.sidebar-link:hover {
                     <i class="fa-solid fa-list"></i>
                 </button>
                 <div class="sidebar-logo">
-                    <a href="#">Metro car hire</a>
+                    <a href="index.php" style="color:red;">Metro car hire</a>
                 </div>
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="{%url 'home'%}" class="sidebar-link">
+                    <a href="dashboard.php" class="sidebar-link">
                         <i class="fa-solid fa-house"></i>
                         <span>Home</span>
                     </a>
@@ -269,6 +278,7 @@ a.sidebar-link:hover {
                     </a>
                     
                 </li>
+                
                 <li class="sidebar-item">
                     <a href="all_bookings.php" class="sidebar-link">
                         <i class="fa-brands fa-product-hunt"></i>
@@ -277,10 +287,11 @@ a.sidebar-link:hover {
                     
                 </li>
                 
+                
                 <li class="sidebar-item">
-                    <a href="cars.php" class="sidebar-link">
+                    <a href="addcar.php" class="sidebar-link">
                         <i class="fa-brands fa-product-hunt"></i>
-                        <span>cars</span>
+                        <span>Update cars</span>
                     </a>
                    
                 </li>
@@ -320,7 +331,7 @@ a.sidebar-link:hover {
     <div class="col-md-4">
       <div class="card text-white bg-danger" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">??</h5>
+          <h5 class="card-title">total users</h5>
           <p class="card-text"><?= $count ?></p>
         </div>
       </div>
@@ -328,16 +339,16 @@ a.sidebar-link:hover {
     <div class="col-md-4">
       <div class="card text-white bg-danger" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">Favourite Car</h5>
-          <p class="card-text">Mazda CX5</p>
+          <h5 class="card-title">Total cars</h5>
+          <p class="card-text"><?= $count3 ?></p>
         </div>
       </div>
     </div>
     <div class="col-md-6 mt-3">
       <div class="card text-white bg-danger" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">Next booking</h5>
-          <p class="card-text">1st june 2024</p>
+          <h5 class="card-title">Total earnings</h5>
+          <p class="card-text">300,000ksh</p>
         </div>
       </div>
     </div>
@@ -346,31 +357,131 @@ a.sidebar-link:hover {
 
 	
 
-    <div class="card  mt-3">
+    <div class="card  mt-3 " style="background-color:lightgray">
   <div class="card-body">
-  <script>
-window.onload = function() {
+  
+
+<script>
+  window.onload = function () {
  
- 
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	title: {
-		text: "Car brands Booked"
-	},
-	subtitles: [{
-		text: "2024"
-	}],
-	data: [{
-		type: "pie",
-		yValueFormatString: "#,##0.00\"%\"",
-		indexLabel: "{label} ({y})",
-		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-	}]
-});
-chart.render();
- 
-}
-</script>
+ var totalVisitors = <?php echo $totalVisitors ?>;
+ var visitorsData = {
+     "New vs Returning Visitors": [{
+         click: visitorsChartDrilldownHandler,
+         cursor: "pointer",
+         explodeOnClick: false,
+         innerRadius: "75%",
+         legendMarkerType: "square",
+         name: "New vs Returning Visitors",
+         radius: "100%",
+         showInLegend: true,
+         startAngle: 90,
+         type: "doughnut",
+         dataPoints: <?php echo json_encode($newVsReturningVisitorsDataPoints, JSON_NUMERIC_CHECK); ?>
+     }],
+     "New Visitors": [{
+         color: "#E7823A",
+         name: "New Visitors",
+         type: "column",
+         xValueType: "dateTime",
+         dataPoints: <?php echo json_encode($newVisitorsDataPoints, JSON_NUMERIC_CHECK); ?>
+     }],
+     "Returning Visitors": [{
+         color: "#546BC1",
+         name: "Returning Visitors",
+         type: "column",
+         xValueType: "dateTime",
+         dataPoints: <?php echo json_encode($returningVisitorsDataPoints, JSON_NUMERIC_CHECK); ?>
+     }]
+ };
+  
+ var newVSReturningVisitorsOptions = {
+     animationEnabled: true,
+     theme: "light2",
+     title: {
+         text: "New VS Returning Visitors"
+     },
+     subtitles: [{
+         text: "Click on Any Segment to Drilldown",
+         backgroundColor: "red",
+         fontSize: 16,
+         fontColor: "white",
+         padding: 5
+     }],
+     legend: {
+         fontFamily: "calibri",
+         fontSize: 14,
+         itemTextFormatter: function (e) {
+             return e.dataPoint.name + ": " + Math.round(e.dataPoint.y / totalVisitors * 100) + "%";  
+         }
+     },
+     data: []
+ };
+  
+ var visitorsDrilldownedChartOptions = {
+     animationEnabled: true,
+     theme: "light2",
+     axisX: {
+         labelFontColor: "#717171",
+         lineColor: "#a2a2a2",
+         tickColor: "#a2a2a2"
+     },
+     axisY: {
+         gridThickness: 0,
+         includeZero: false,
+         labelFontColor: "#717171",
+         lineColor: "#a2a2a2",
+         tickColor: "#a2a2a2",
+         lineThickness: 1
+     },
+     data: []
+ };
+  
+ var chart = new CanvasJS.Chart("chartContainer", newVSReturningVisitorsOptions);
+ chart.options.data = visitorsData["New vs Returning Visitors"];
+ chart.render();
+  
+ function visitorsChartDrilldownHandler(e) {
+     chart = new CanvasJS.Chart("chartContainer", visitorsDrilldownedChartOptions);
+     chart.options.data = visitorsData[e.dataPoint.name];
+     chart.options.title = { text: e.dataPoint.name }
+     chart.render();
+     $("#backButton").toggleClass("invisible");
+ }
+  
+ $("#backButton").click(function() { 
+     $(this).toggleClass("invisible");
+     chart = new CanvasJS.Chart("chartContainer", newVSReturningVisitorsOptions);
+     chart.options.data = visitorsData["New vs Returning Visitors"];
+     chart.render();
+ });
+  
+ }
+ </script>
+ <style>
+   #backButton {
+     border-radius: 4px;
+     padding: 8px;
+     border: none;
+     font-size: 16px;
+     background-color: #2eacd1;
+     color: white;
+     position: absolute;
+     top: 10px;
+     right: 10px;
+     cursor: pointer;
+   }
+   .invisible {
+     display: none;
+   }
+ </style>
+
+
+
+
+
+
+
 
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>

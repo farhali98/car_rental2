@@ -125,6 +125,10 @@
 .product:hover .buttons {
   opacity: 1;
 }
+.bullet-align {
+        display: inline-block;
+        text-align: left;
+    }
 
   </style>
 </head>
@@ -188,79 +192,54 @@
 	<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active" style ="height: 300px;" data-bs-interval="5000">
-      <img  src="img/cs3.jpg" class="d-block w-100" alt="...">
+      <img  src="img\cs7.jpg" class="d-block w-100" alt="...">
     </div>
   </div>
 
 
-
-
-
-    <div class="head-container" id="shoes" style="font-weight: bold; font-size: 25px; color: red; border-bottom: solid;">
-        <p>Executive Cars For Hire</p>
+       
+        <div class="head-container" id="shoes" style="font-weight: bold; font-size: 25px; color: red; border-bottom: solid; margin-bottom:20px">
+            <p>About Us</p>
+        </div>
        </div>
-      
-      
-       <!-- Product grid -->
-      <div class="product-grid">
-        <div class="product">
-          <img src="img/pd1.jpg" alt="Product 1">
-          <div class="buttons">
-            <a href="#" class="buy-button" style="color: red;">Hire Now</a>
-          </div>
-          <p>p1<br><b>$xx.xx</b></p>
-        </div>
-        <div class="product">
-          <img src="img/pd2.jpg" alt="Product 2">
-          <div class="buttons">
-            <a href="#" class="buy-button" style="color: red;">Hire Now</a>
-          </div>
-          <p>p2<br><b>$xx.xx</b></p>
-        </div>
-        <div class="product">
-          <img src="img/pd3.jpg" alt="Product 3">
-          <div class="buttons">
-            <a href="#" class="buy-button" style="color: red;">Hire Now</a>
-          </div>
-          <p>p3<br><b>$xx.xx</b></p>
-        </div>
-        <div class="product">
-          <img src="img/pd4.jpg" alt="Product 4">
-          <div class="buttons">
-            <a href="#" class="buy-button" style="color: red;">Hire Now</a>
-          </div>
-          <p>p4<br><b>$xx.xx</b></p>
-        </div>
-        <div class="product">
-          <img src="img/pd5.jpg" alt="Product 5">
-          <div class="buttons">
-            <a href="#" class="buy-button" style="color: red;">Hire Now</a>
-          </div>
-          <p>p5<br><b>$XX.XX</b></p>
-        </div>
-        <div class="product">
-          <img src="img/pd6.png" alt="Product 6">
-          <div class="buttons">
-            <a href="#" class="buy-button" style="color: red;">Hire Now</a>
-          </div>
-          <p>p6<br><b>$XX.XX</b></p>
-        </div>
-        <div class="product">
-          <img src="img/pd7.jpg" alt="Product 7">
-          <div class="buttons">
-            <a href="#" class="buy-button" style="color: red;">Hire Now</a>
-          </div>
-          <p>p7<br><b>$XX.XX</b></p>
-        </div>
-        <div class="product">
-          <img src="img/pd8.jpg" alt="Product 8">
-          <div class="buttons">
-            <a href="#" class="buy-button" style="color: red;">Hire Now</a>
-          </div>
-          <p>p8<br><b>$XX.XX</b></p>
-        </div>
+
+    <!---descriptionnnnnn-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="description">
+        <p>Welcome to Metro Car Hire, your trusted partner for premium car hire and chauffeur services. We pride ourselves on offering a diverse fleet of luxury vehicles and professional chauffeurs dedicated to providing a first-class travel experience. Whether you need transportation for business meetings, airport transfers, special events, or leisurely trips, our team is committed to ensuring your journey is safe, comfortable, and punctual.
+
+<br><br>Our mission is to deliver exceptional service with attention to detail, reliability, and a personal touch. We understand that every client has unique needs, and we tailor our services to meet those expectations. At [Your Company Name], your satisfaction is our highest priority. Choose us for an unparalleled travel experience, where luxury meets convenience.</p>
       </div>
-    
+    </div>
+    <div class="col-md-6">
+      <div class="image-container">
+        <img src="img/img1.jpg" alt="Placeholder Image" class="img-fluid">
+      </div>
+    </div>
+
+    <div class="container mt-5 p-5">
+    <div class="row rules">
+        <h3 class="p-3 text-center" style = "color: red">Why Choose Us</h3>
+        <div class="col-md-6 px-4 p-3 text-center"> <!-- Centering the points -->
+            <ul class="list-unstyled bullet-align"> <!-- Added bullet-align class -->
+                <li class="mb-3">-> Diverse fleet for every need.</li>
+                <li class="mb-3">-> Professional, courteous chauffeurs.</li>
+                <li class="mb-3">-> Hassle-free booking and scheduling.</li>
+                <li class="mb-3">-> Tailored services for any occasion.</li>
+            </ul>
+        </div>
+        <div class="col-md-6 p-3 text-center"> <!-- Centering the points -->
+            <ul class="list-unstyled bullet-align"> <!-- Added bullet-align class -->
+                <li class="mb-3">-> Priority on safety and maintenance.</li>
+                <li class="mb-3">-> Luxury at competitive rates.</li>
+                <li class="mb-3">-> 24/7 availability for convenience.</li>
+                <li class="mb-3">-> Unwavering commitment to customer satisfaction.</li>
+            </ul>
+        </div>
+    </div>
+</div>
 </body>
 
 <!-- Footer -->
@@ -383,6 +362,10 @@
   <!-- Copyright -->
 </footer>
 <!-- Footer -->
+            
+        
+
+
 
 
 <script src = "js/jq.js"></script>

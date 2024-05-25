@@ -6,15 +6,16 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require_once('config.php');
 
-require_once 'PHPMailer/src/PHPMailer.php';
-require_once 'PHPMailer/src/Exception.php';
-require_once 'PHPMailer/src/SMTP.php';
+require_once 'PHPMailer\PHPMailer-master\src\PHPMailer.php';
+require_once 'PHPMailer\PHPMailer-master\src\Exception.php';
+require_once 'PHPMailer\PHPMailer-master\src\SMTP.php';
+
 
 
 // Include PHPMailer library
 
 
-function send_email($email){
+function send_email($email,$carname,$pickupdate,$dropoffdate,$totalamount){
 
     
     
@@ -28,19 +29,20 @@ function send_email($email){
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com'; // SMTP server
         $mail->SMTPAuth   = true;                // Enable SMTP authentication
-        $mail->Username   = '';  // SMTP username
-        $mail->Password   = '';// SMTP password
+        $mail->Username   = 'farhamusaali@gmail.com';  // SMTP username
+        $mail->Password   = 'wsat blaz eyrc zody';// SMTP password
         $mail->SMTPSecure = 'tls';               // Enable TLS encryption
         $mail->Port       = 587;                 // TCP port to connect to
     
         //Sender and recipient settings
-        $mail->setFrom('hzhzhhsj58@gmail.com', 'Metro Car Hire');
+        $mail->setFrom('farhamusaali@gmail.com', 'Metro Car Hire');
         $mail->addAddress($email, 'cow');
     
         // Content
                                          // Set email format to HTML
         $mail->Subject = 'Booking confirmed ';
-        $mail->Body    = 'Your booking has been confirmed ';
+        $mail->Body = 'car booked'.$carname . ',' . 'pick up date'.$pickupdate . ',' . 'drop off date'.$dropoffdate . ',' . 'total amount'.$totalamount;
+
     
         // Send the email
         $mail->send();
@@ -63,7 +65,7 @@ function send_email($email){
 }
 
 function get_car($pdo){
-    $sql="SELECT * FROM tbl_cars where statu='Unbooked' ";
+    $sql="SELECT * FROM tbl_cars ";
     $stmt = $pdo -> prepare($sql);
     $stmt -> execute();
     return $stmt -> fetchALL(PDO::FETCH_ASSOC);
@@ -71,6 +73,16 @@ function get_car($pdo){
 }
 
 
+function carname($pdo, $id) {
+ 
+    $sql = "SELECT car_name FROM tbl_cars WHERE car_id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    
+    return $stmt->fetchColumn();
+}
 
 
 
@@ -90,9 +102,13 @@ function add_booking($pdo){
      $pickup_date=$_POST['pdate'];
      $drop1=$_POST['return-date'];
      $car_id=$_POST['car_id'];
+     $carname=carname($pdo,$car_id);
+
+     send_email($email,$carname,$pickup_date,$drop1,100);
+
      $params = array($user_id, $name,$email, $id,$car_id,$pickup_date,$drop1);
 	 $sql = "INSERT INTO tbl_bookings (user_id, fname, email,id,car_id,pickup,dropoff) VALUES(?,?,?,?,?,?,?)";
-     send_email($email);
+     send_email($email,$car_id,$pickup_date,$drop1,100);
      $stmt = $pdo -> prepare($sql);
       update_status($pdo,$car_id);
 	 $stmt -> execute($params);
@@ -161,46 +177,13 @@ function add_booking($pdo){
     <title>Metro car hire</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-     <header>
-     <nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="index.html"><h2>Metro Car <em>hire</em></h2></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
-                </li> 
-                <li class="nav-item"><a class="nav-link" href="cars.html">Cars</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="blog.html">Maiiage </a>
-                        <a class="dropdown-item" href="team.html">blah</a>
-                        <a class="dropdown-item" href="testimonials.html">Blah</a>
-                        <a class="dropdown-item" href="terms.html">Bah</a>
-                    </div>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Signup</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-
-
-     </header>
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/owl.css">
+     
 
 
 
@@ -212,37 +195,134 @@ function add_booking($pdo){
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 		
 	</head>
-    <nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="index.html"><h2>Metro Car <em>hire</em></h2></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
-                </li> 
-                <li class="nav-item"><a class="nav-link" href="cars.html">Cars</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="blog.html">Maiiage </a>
-                        <a class="dropdown-item" href="team.html">blah</a>
-                        <a class="dropdown-item" href="testimonials.html">Blah</a>
-                        <a class="dropdown-item" href="terms.html">Bah</a>
-                    </div>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Signup</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+   
 
-	<body class="is-preload" >
+	<body>
+    <style>
+        .custom-navbar{
+            background-color: #D0D0D0;
+            height: 100px;
+        }
+        .navbar-nav .nav-link {
+            font-size: 16px;
+            color: black;
+            padding: 10px 15px;
+        }
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .dropdown:hover .nav-link {
+            background-color: white;
+        }
+        
+
+
+
+        
+/* Dropdown Button */
+        .dropbtn {
+        font-size: 16px;
+        border: none;
+        background: none;
+        padding: 10px 15px;
+        }
+
+/* Dropdown Content */
+        .dropdown-content {
+        display: none;
+        position: fixed;
+        margin-top: 2px;
+        background-color: white;
+        min-width: 150px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        }
+
+/* Links inside the dropdown */
+        .dropdown-content a {
+        color: black;
+        padding: 10px 15px;
+        text-decoration: none;
+        display: block;
+        }
+
+/* color of dropdown links on hover */
+        .dropdown-content a:hover {color: red;}
+
+/* dropdown menu on hover */
+        .dropdown:hover .dropdown-content {display: block;}
+
+/*background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {background-color: white;}
+
+/*descriptionnnnnnnn*/
+        
+
+      .description h3 {
+      
+      display: inline-block;
+      border-bottom: 2px solid;
+      }
+      .rules h3{
+        text-align: center;
+      }
+     
+      
+       
+
+       
+    </style>
+       <!--navbarrrrr-->
+
+	<nav class="navbar navbar-expand-lg custom-navbar">
+  	<div class="container-fluid">
+    <a class="navbar-brand logo-text" style="font-weight: bold; color: red; font-size: 30px; margin-left: 30px;" href="index.php">Metro</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+        </li>
+        <li class="dropdown">
+            <button class="dropbtn">Cars For Hire</button>
+            <ul class="dropdown-content">
+              <a href="saloon.php">Saloon Cars</a>
+              <a href="4x4.php">4x4 SUVs</a>
+              <a href="executive.php">Executive Cars</a>
+              <a href="shuttle.php">Shuttle Busses</a>
+            </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="services.php">Our Services</a>
+        </li>
+		<li class="nav-item">
+          <a class="nav-link" href="aboutus.php">About us</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="contact_us.php">Inquiries</a>
+          </li>
+        
+        <li class="nav-item dropdown" style="margin-left: 500px; font-weight: bold;">
+          <a class="nav-link dropdown-toggle" style="color: red;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Account
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="signup.php">Sign Up</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="signin.php">Sign In</a></li>
+            
+            
+          </ul>
+        </li>
+        
+      </ul>
+      <!---<form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>---->
+    </div>
+  </div>
+</nav>
 		<!-- Wrapper -->
 			
 
@@ -279,7 +359,7 @@ function add_booking($pdo){
 				
                                 
                             
-                            <button type="submit" name="book" class="btn btn-dark btn-block">Submit</button>
+                            <button style="float: right;" type="submit"  name="book" class="btn btn-danger mt-3  btn-block">Submit</button>
                         </form>
                     </div>
                     
@@ -289,17 +369,126 @@ function add_booking($pdo){
                     
                     
                     
-                    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="inner-content">
-              <p>Copyright © 2024 Metro Car </p>
-            </div>
-          </div>
+                   <!-- Footer -->
+<footer class="bg-body-white-tertiary mt-3 text-center bg-none">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+      <!-- Facebook -->
+      <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-facebook-f"></i
+      ></a>
+
+      <!-- Twitter -->
+      <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-twitter"></i
+      ></a>
+
+      <!-- Google -->
+      <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-google"></i
+      ></a>
+
+      <!-- Instagram -->
+      <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-instagram"></i
+      ></a>
+
+      <!-- Linkedin -->
+      <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-linkedin-in"></i
+      ></a>
+
+      
+    </section>
+    <!-- Section: Social media -->
+
+    
+
+    <!-- Section: Links -->
+    <section class="">
+      <!--Grid row-->
+      <div class="row justify-content-center">
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Rental Car Types</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a class="text-body" href="saloon.php">Saloon Cars</a>
+            </li>
+            <li>
+              <a class="text-body" href="4x4.php">4x4 SUVs</a>
+            </li>
+            <li>
+              <a class="text-body" href="executive.php">Executive Cars</a>
+            </li>
+            <li>
+              <a class="text-body" href="shuttle.php">Shuttle Busses</a>
+            </li>
+          </ul>
         </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Our Services</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a class="text-body" href="services.php">VIP Transportation</a>
+            </li>
+            <li>
+              <a class="text-body" href="services.php">Airport Transfers</a>
+            </li>
+            <li>
+              <a class="text-body" href="services.php">Wedding & Bridal Services</a>
+            </li>
+            <li>
+              <a class="text-body" href="services.php">Tour & Safaris</a>
+            </li>
+            <li>
+              <a class="text-body" href="services.php">City Excursion</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Contact Details</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a class="text-body" href="#!">Metro Car Hire</a>
+            </li>
+            <li>
+              <a class="text-body" href="#!">Nairobi, Kenya</a>
+            </li>
+            <li>
+              <a class="text-body" href="#!">+254757449656</a>
+            </li>
+            <li>
+              <a class="text-body" href="#!">metro@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
       </div>
-    </footer>
+      <!--Grid row-->
+    </section>
+    <!-- Section: Links -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3">
+    Copyright © : Metro Car Hire. All Rights Reserved
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
                     
                     
                     

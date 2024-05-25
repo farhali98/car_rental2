@@ -176,44 +176,42 @@
 
 	<nav class="navbar navbar-expand-lg custom-navbar">
   	<div class="container-fluid">
-    <a class="navbar-brand" href="#">
-        <img src="img/logo/logo.png" style="height: 120px; width: 120px;">
-    </a>
+    <a class="navbar-brand logo-text" style="font-weight: bold; color: red; font-size: 30px; margin-left: 30px;" href="index.php">Metro</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
         </li>
         <li class="dropdown">
             <button class="dropbtn">Cars For Hire</button>
             <ul class="dropdown-content">
-              <a href="#">Saloon Cars</a>
-              <a href="#">4x4 SUVs</a>
-              <a href="#">Executive Cars</a>
-              <a href="#">Shuttle Busses</a>
+              <a href="saloon.php">Saloon Cars</a>
+              <a href="4x4.php">4x4 SUVs</a>
+              <a href="executive.php">Executive Cars</a>
+              <a href="shuttle.php">Shuttle Busses</a>
             </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Our Services</a>
+          <a class="nav-link active" aria-current="page" href="services.php">Our Services</a>
         </li>
 		<li class="nav-item">
-          <a class="nav-link" href="#">About us</a>
+          <a class="nav-link" href="aboutus.php">About us</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Inquiries</a>
+            <a class="nav-link" href="contact_us.php">Inquiries</a>
           </li>
         
-        <li class="nav-item dropdown" style="margin-left: 550px;">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <li class="nav-item dropdown" style="margin-left: 500px; font-weight: bold;">
+          <a class="nav-link dropdown-toggle" style="color: red;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Account
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Sign Up</a></li>
+            <li><a class="dropdown-item" href="signup.php">Sign Up</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Sign In</a></li>
+            <li><a class="dropdown-item" href="signin.php">Sign In</a></li>
             
             
           </ul>

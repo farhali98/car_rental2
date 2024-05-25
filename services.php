@@ -129,9 +129,9 @@
   </style>
 </head>
 <body>
-  <!--navbarrrrr-->
+ <!--navbarrrrr-->
 
-	<nav class="navbar navbar-expand-lg custom-navbar">
+ <nav class="navbar navbar-expand-lg custom-navbar">
   	<div class="container-fluid">
     <a class="navbar-brand logo-text" style="font-weight: bold; color: red; font-size: 30px; margin-left: 30px;" href="index.php">Metro</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -188,79 +188,84 @@
 	<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active" style ="height: 300px;" data-bs-interval="5000">
-      <img  src="img/cs3.jpg" class="d-block w-100" alt="...">
+      <img  src="img\cs6.jpg" class="d-block w-100" alt="...">
     </div>
   </div>
 
 
-
-
-
-    <div class="head-container" id="shoes" style="font-weight: bold; font-size: 25px; color: red; border-bottom: solid;">
-        <p>Executive Cars For Hire</p>
-       </div>
-      
-      
-       <!-- Product grid -->
-      <div class="product-grid">
-        <div class="product">
-          <img src="img/pd1.jpg" alt="Product 1">
-          <div class="buttons">
-            <a href="#" class="buy-button" style="color: red;">Hire Now</a>
-          </div>
-          <p>p1<br><b>$xx.xx</b></p>
+       <div class="container">
+        <div class="head-container" id="shoes" style="font-weight: bold; font-size: 25px; color: red; border-bottom: solid; margin-bottom:20px">
+            <p>Our Services</p>
         </div>
-        <div class="product">
-          <img src="img/pd2.jpg" alt="Product 2">
-          <div class="buttons">
-            <a href="#" class="buy-button" style="color: red;">Hire Now</a>
-          </div>
-          <p>p2<br><b>$xx.xx</b></p>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card" style="width: 100%; background: lightgray">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 100%; background: lightgray">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 100%; background: lightgray">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 100%; background: lightgray; margin-top:20px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 100%; background: lightgray; margin-top:20px; ">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 100%; background: lightgray; margin-top:20px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="product">
-          <img src="img/pd3.jpg" alt="Product 3">
-          <div class="buttons">
-            <a href="#" class="buy-button" style="color: red;">Hire Now</a>
-          </div>
-          <p>p3<br><b>$xx.xx</b></p>
-        </div>
-        <div class="product">
-          <img src="img/pd4.jpg" alt="Product 4">
-          <div class="buttons">
-            <a href="#" class="buy-button" style="color: red;">Hire Now</a>
-          </div>
-          <p>p4<br><b>$xx.xx</b></p>
-        </div>
-        <div class="product">
-          <img src="img/pd5.jpg" alt="Product 5">
-          <div class="buttons">
-            <a href="#" class="buy-button" style="color: red;">Hire Now</a>
-          </div>
-          <p>p5<br><b>$XX.XX</b></p>
-        </div>
-        <div class="product">
-          <img src="img/pd6.png" alt="Product 6">
-          <div class="buttons">
-            <a href="#" class="buy-button" style="color: red;">Hire Now</a>
-          </div>
-          <p>p6<br><b>$XX.XX</b></p>
-        </div>
-        <div class="product">
-          <img src="img/pd7.jpg" alt="Product 7">
-          <div class="buttons">
-            <a href="#" class="buy-button" style="color: red;">Hire Now</a>
-          </div>
-          <p>p7<br><b>$XX.XX</b></p>
-        </div>
-        <div class="product">
-          <img src="img/pd8.jpg" alt="Product 8">
-          <div class="buttons">
-            <a href="#" class="buy-button" style="color: red;">Hire Now</a>
-          </div>
-          <p>p8<br><b>$XX.XX</b></p>
-        </div>
-      </div>
-    
+    </div>
 </body>
 
 <!-- Footer -->
@@ -383,6 +388,8 @@
   <!-- Copyright -->
 </footer>
 <!-- Footer -->
+
+
 
 
 <script src = "js/jq.js"></script>
